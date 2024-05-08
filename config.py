@@ -18,7 +18,7 @@ GPT_ENGINE = os.environ.get('GPT_ENGINE', 'gpt-4-turbo-2024-04-09')
 # DEFAULT_SEARCH_MODEL = os.environ.get('DEFAULT_SEARCH_MODEL', 'gpt-3.5-turbo-1106') gpt-3.5-turbo-16k
 API_URL = os.environ.get('API_URL', 'https://api.openai.com/v1/chat/completions')
 # PDF_EMBEDDING = (os.environ.get('PDF_EMBEDDING', "True") == "False") == False
-LANGUAGE = os.environ.get('LANGUAGE', 'Simplified Chinese')
+LANGUAGE = os.environ.get('LANGUAGE', 'English')
 GROQ_API_KEY = os.environ.get('GROQ_API_KEY', None)
 GOOGLE_AI_API_KEY = os.environ.get('GOOGLE_AI_API_KEY', None)
 CUSTOM_MODELS = os.environ.get('CUSTOM_MODELS', None)
@@ -166,27 +166,27 @@ if CUSTOM_MODELS_LIST:
 buttons = create_buttons(initial_model)
 buttons.append(
     [
-        InlineKeyboardButton("返回上一级", callback_data="返回上一级"),
+        InlineKeyboardButton("Back to Previous Level", callback_data="Go Back"),
     ],
 )
 
 def update_first_buttons_message():
     history = "✅" if PASS_HISTORY else "☑️"
-    language = "🇨🇳 中文" if LANGUAGE == "Simplified Chinese" else "🇺🇸 English"
+    language = "English" if LANGUAGE == "English" else "🇺🇸 English"
 
     first_buttons = [
         [
-            InlineKeyboardButton("更换问答模型", callback_data="更换问答模型"),
+            InlineKeyboardButton("English Dialogue Model", callback_data="Switch Dialogue Model"),
             InlineKeyboardButton(language, callback_data="language"),
-            InlineKeyboardButton(f"历史记录 {history}", callback_data="PASS_HISTORY"),
+            InlineKeyboardButton(f"History Record {history}", callback_data="PASS_HISTORY"),
         ],
         [
-            InlineKeyboardButton(f"搜索 {get_plugins_status('SEARCH_USE_GPT')}", callback_data='SEARCH_USE_GPT'),
-            InlineKeyboardButton(f"当前时间 {get_plugins_status('DATE')}", callback_data='DATE'),
+            InlineKeyboardButton(f"Search {get_plugins_status('SEARCH_USE_GPT')}", callback_data='SEARCH_USE_GPT'),
+            InlineKeyboardButton(f"Current Time {get_plugins_status('DATE')}", callback_data='DATE'),
         ],
         [
-            InlineKeyboardButton(f"URL 总结 {get_plugins_status('URL')}", callback_data='URL'),
-            InlineKeyboardButton(f"版本信息 {get_plugins_status('VERSION')}", callback_data='VERSION'),
+            InlineKeyboardButton(f"URL Summary {get_plugins_status('URL')}", callback_data='URL'),
+            InlineKeyboardButton(f"Version Information {get_plugins_status('VERSION')}", callback_data='VERSION'),
             # InlineKeyboardButton(f"gpt4free {get_plugins_status('USE_G4F')}", callback_data='USE_G4F'),
         ],
     ]
